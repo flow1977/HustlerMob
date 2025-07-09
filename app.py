@@ -1,69 +1,50 @@
-
 import streamlit as st
 
-st.set_page_config(page_title='HustlerMob', page_icon='🛡️', layout='centered')
+html_code = """
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HustlerMob – Dein digitales Ökosystem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --brand-gold: #caa53b; --dark-bg: #0d0d0d; --card-bg: #1a1a1a; --text-light: #e0e0e0; --text-dark: #000; --border-color: #333; }
+    body { font-family: "Roboto", sans-serif; background-color: var(--dark-bg); color: var(--text-light); margin: 0; line-height: 1.7; font-size: 17px; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+    header { text-align: center; padding: 60px 20px 40px; }
+    .logo { width: 220px; height: auto; margin-bottom: 20px; }
+    header h1 { font-family: 'Anton', sans-serif; font-size: 4em; font-weight: 400; text-transform: uppercase; letter-spacing: 4px; color: var(--brand-gold); margin: 0; }
+    header p { font-size: 1.25em; color: #aaa; margin-top: 10px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    nav { background-color: var(--card-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 15px 0; text-align: center; position: sticky; top: 0; z-index: 1000; }
+    nav a { color: var(--brand-gold); margin: 0 15px; text-decoration: none; font-weight: bold; transition: color 0.3s ease; }
+    nav a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <svg class="logo" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="150" fill="#caa53b"/>
+          <rect y="15" width="300" height="120" fill="black"/>
+          <text x="50%" y="58" dominant-baseline="middle" text-anchor="middle" font-family="'Anton', sans-serif" font-size="48" fill="white" letter-spacing="4">HUSTLER</text>
+          <text x="50%" y="108" dominant-baseline="middle" text-anchor="middle" font-family="'Anton', sans-serif" font-size="48" fill="white" letter-spacing="4">MOB</text>
+      </svg>
+      <h1>HustlerMob</h1>
+      <p>Mehr als eine App. Dein digitales Ökosystem für Selbstbestimmung.</p>
+    </header>
+    <nav>
+      <a href="#about">Was ist das?</a>
+      <a href="#features">Funktionen</a>
+      <a href="#pricing">Preise</a>
+      <a href="https://hustlermob1.streamlit.app/" target="_blank">App starten</a>
+    </nav>
+    <!-- Dein restlicher HTML-Inhalt hier einfügen -->
+  </div>
+</body>
+</html>
+"""
 
-st.markdown(
-    """
-    <style>
-    body { background-color: #0d0d0d !important; color: #e0e0e0 !important; }
-    .stButton>button {
-        background-color: #caa53b !important;
-        color: black !important;
-        font-weight: bold;
-        border-radius: 8px;
-        padding: 10px 24px;
-    }
-    .stTextInput>div>div>input {
-        background-color: #1a1a1a;
-        color: white;
-    }
-    </style>
-    """, unsafe_allow_html=True
-)
-
-st.image("logo.png", width=200)
-st.title("HustlerMob – Kein Tool. Eine Haltung.")
-
-st.markdown("""
-**Reagiere digital auf analoge Einschüchterung.**  
-Lade dein Dokument hoch und erhalte einen passenden Antworttext – direkt, gezielt, selbst.
-""")
-
-uploaded_file = st.file_uploader("📄 Dokument hochladen (PDF, JPG, PNG)", type=["pdf", "jpg", "jpeg", "png"])
-
-
-tone = st.radio(
-    "🎙️ Wähle den Tonfall deiner Antwort:",
-    ["Sachlich (kostenlos)", "Bestimmt (Pro)", "Eskalation (Pro)"],
-    index=0,
-    disabled=False
-)
-
-if st.button("Antwort generieren"):
-
-    if not uploaded_file:
-        st.error("Bitte lade zuerst ein Dokument hoch.")
-    else:
-        with st.spinner("Analysiere dein Dokument..." if tone.startswith("Sachlich") else "Pro-Funktion wird geladen..."):
-            st.markdown("""---""")
-            st.subheader("📬 Deine Antwort:")
-            st.code("""
-WIDERSPRUCH
-
-Sehr geehrte Damen und Herren,
-
-hiermit lege ich gegen Ihren Bescheid vom [Datum des Schreibens], Aktenzeichen [Aktenzeichen], fristgerecht Widerspruch ein.
-
-Begründung:
-Der von Ihnen dargestellte Sachverhalt ist unvollständig und die daraus gezogenen Schlussfolgerungen sind rechtlich nicht haltbar. Insbesondere die Anwendung von § [relevanter Paragraph] des [relevantes Gesetzbuch] ist in diesem Fall nicht zutreffend, da [kurze, klare Begründung].
-
-Ich fordere Sie auf, den Sachverhalt unter Berücksichtigung der von mir eingereichten Unterlagen erneut zu prüfen und den angefochtenen Bescheid vollumfänglich aufzuheben.
-
-Eine detaillierte Begründung erfolgt nach Akteneinsicht. Bitte bestätigen Sie mir den Eingang dieses Widerspruchs schriftlich.
-
-Mit freundlichen Grüßen,
-
-[Ihr Name]
-""", language="text")
-            st.success("Text generiert. Du kannst ihn nun kopieren oder anpassen.")
+st.components.v1.html(html_code, height=5000, scrolling=True)
